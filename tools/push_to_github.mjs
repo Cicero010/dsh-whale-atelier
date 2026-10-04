@@ -29,6 +29,7 @@ function parseArgs(argv) {
     owner: null,
     private: false,
     dryRun: false,
+    recreate: false,
     tokenFile: path.join(WORKSPACE, ".github-token"),
     message: "feat: 鲸鱼皮肤包 v1.1.0（五套内置皮肤 + 第三方皮肤包 + 装饰层 + 环境粒子 + Agent 状态联动）",
     deleteTokenFile: false,
@@ -37,6 +38,7 @@ function parseArgs(argv) {
     const flag = argv[i];
     if (flag === "--private") args.private = true;
     else if (flag === "--dry-run") args.dryRun = true;
+    else if (flag === "--recreate") args.recreate = true;
     else if (flag === "--delete-token-file") args.deleteTokenFile = true;
     else if (flag.startsWith("--")) {
       const key = flag.slice(2).replace(/-([a-z])/g, (_, c) => c.toUpperCase());
@@ -79,11 +81,22 @@ async function api(token, method, url, body) {
       body: body === undefined ? undefined : JSON.stringify(body),
     });
     if (response.status === 403 || response.status === 429) {
-      const retryAfter = Number(response.headers.get("retry-after") ?? "0");
-      const waitMs = retryAfter > 0 ? retryAfter * 1000 : 2500 * (attempt + 1);
-      lastError = new Error(`${method} ${url} -> ${response.status}（限流，等待 ${waitMs}ms 后重试）`);
-      await sleep(waitMs);
-      continue;
+      const text = await response.text();
+      const remaining = response.headers.get("x-ratelimit-remaining");
+      // 403 既可能是限流也可能是权限不足，必须区分：只有确实是限流才退避重试
+      const rateLimited = response.status === 429
+        || remaining === "0"
+        || /rate limit|abuse|secondary rate/i.test(text);
+      if (rateLimited) {
+        const retryAfter = Number(response.headers.get("retry-after") ?? "0");
+        const waitMs = retryAfter > 0 ? retryAfter * 1000 : 2500 * (attempt + 1);
+        lastError = new Error(`${method} ${url} -> ${response.status}（限流，等待 ${waitMs}ms 后重试）`);
+        await sleep(waitMs);
+        continue;
+      }
+      const error = new Error(`${method} ${url} -> ${response.status}（权限不足，不是限流）${text.slice(0, 240)}`);
+      error.status = response.status;
+      throw error;
     }
     const text = await response.text();
     let data = null;
@@ -137,6 +150,20 @@ async function ensureHead(token, owner, repo) {
   return { head: ref.object.sha, bootstrapped: true };
 }
 
+/** 读取 classic 令牌的权限清单（GitHub 用 x-oauth-scopes 头返回；fine-grained 令牌不返回该头）。 */
+async function tokenScopes(token) {
+  const response = await fetch(`${API}/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/vnd.github+json",
+      "User-Agent": "dsh-whale-wallpaper-publisher",
+    },
+  });
+  const header = response.headers.get("x-oauth-scopes");
+  if (header === null) return null;
+  return header.split(",").map((item) => item.trim()).filter(Boolean);
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (!existsSync(args.tree)) throw new Error(`发布树不存在：${args.tree}（先跑 tools/build_repo.py）`);
@@ -156,6 +183,24 @@ async function main() {
   if (args.dryRun) {
     console.log("\n--dry-run：只校验令牌与账号，不做任何写操作。");
     return;
+  }
+
+  // --recreate：删掉同名仓库再重建，让历史里只剩这一次提交
+  // （旧提交里的对象会随仓库一起消失，按 SHA 直接取也会 404；需要 delete_repo 权限）
+  if (args.recreate) {
+    const scopes = await tokenScopes(token);
+    console.log(`令牌权限：${scopes === null ? "（fine-grained 令牌，不返回权限头）" : scopes.join(", ") || "（无）"}`);
+    if (scopes !== null && !scopes.includes("delete_repo")) {
+      throw new Error("该令牌缺少 delete_repo 权限，删库会 403。请在 classic 令牌里同时勾选 repo 与 delete_repo 后重试（本次未做任何改动）。");
+    }
+    try {
+      await api(token, "DELETE", `/repos/${owner}/${args.repo}`);
+      console.log(`已删除旧仓库 ${owner}/${args.repo}（含全部历史）`);
+    } catch (error) {
+      if (error.status === 404) console.log("旧仓库不存在，跳过删除");
+      else throw error;
+    }
+    await sleep(2000);
   }
 
   let exists = true;

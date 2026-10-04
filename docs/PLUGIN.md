@@ -111,8 +111,8 @@ profile 里 `dsh-hmr` 默认启用（`@deepseek-ai/dsh-base` 的 patch：`disabl
 预览需要先导出客户端 bundle（`_probe/*.client.js`），用`tools/asar_probe.py`：
 
 ```bash
-python tools/asar_probe.py "node_modules/@deepseek-ai/dsh-client-ui-theme/lib/client.js" save "_probe/ui-theme.client.js"
-python tools/asar_probe.py "node_modules/@deepseek-ai/dsh-client-ui-layout/lib/client.js" save "_probe/ui-layout.client.js"
+python tools/asar_probe.py --asar "<DSH 安装目录>/resources/app.asar" "node_modules/@deepseek-ai/dsh-client-ui-theme/lib/client.js" save "_probe/ui-theme.client.js"
+python tools/asar_probe.py --asar "<DSH 安装目录>/resources/app.asar" "node_modules/@deepseek-ai/dsh-client-ui-layout/lib/client.js" save "_probe/ui-layout.client.js"
 ```
 
 截图（Windows 自带 Edge）：
