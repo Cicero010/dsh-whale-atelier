@@ -1,6 +1,6 @@
 # 皮肤包格式与安装
 
-`dsh-whale-wallpaper` 的皮肤可以来自插件外部 —— 一个目录 + 一份 `skin.json` 就是一套皮肤。
+`dsh-whale-atelier` 的皮肤可以来自插件外部 —— 一个目录 + 一份 `skin.json` 就是一套皮肤。
 
 ## 两条安装路径
 

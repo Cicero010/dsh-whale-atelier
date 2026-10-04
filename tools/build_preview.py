@@ -21,7 +21,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PROBE = os.path.join(ROOT, "_probe")
-PLUGIN = os.path.join(ROOT, "dsh-whale-wallpaper")
+PLUGIN = ROOT if os.path.isdir(os.path.join(ROOT, "lib")) else os.path.join(ROOT, "dsh-whale-atelier")
 
 CSS_LITERAL = re.compile(r'([A-Za-z_$][\w$]*)\s*=\s*"((?:[^"\\]|\\.){200,})";')
 
@@ -192,7 +192,7 @@ def build(theme: str, pose: str, scope: str, skin_id: str, state: str = "idle") 
 <html lang="zh-CN" data-ww="on" data-ww-scope="{scope}" data-ww-decor="{decor_attr}" data-ww-mascot="{mascot_spot}" data-ww-mascot-state="{state}" data-ww-particles="{skin['particles']}" data-platform="win32" data-windows-titlebar style="{inline_style}">
 <head>
 <meta charset="utf-8">
-<title>dsh-whale-wallpaper 预览（{skin_id} / {theme} / {pose} / {scope}）</title>
+<title>dsh-whale-atelier 预览（{skin_id} / {theme} / {pose} / {scope}）</title>
 <style>{css}</style>
 <style>{MOCK_CSS}</style>
 <style>{wallpaper}</style>
@@ -224,7 +224,7 @@ def build(theme: str, pose: str, scope: str, skin_id: str, state: str = "idle") 
             <div class="mock-role">DeepSeek</div>
             <div class="mock-text">皮肤包已经装好：壁纸铺满整个界面，金饰描边、蝴蝶结输入框与角落立绘都在自己的图层上，只读 DOM、不改产品样式。</div>
             <div style="height:12px"></div>
-            <div class="mock-tool">✔ dsh-whale-wallpaper · 6 套皮肤（含皮肤包）· 30 张壁纸 · 7 只立绘 · 6 种粒子</div>
+            <div class="mock-tool">✔ dsh-whale-atelier · 6 套皮肤（含皮肤包）· 30 张壁纸 · 7 只立绘 · 6 种粒子</div>
             <div style="height:12px"></div>
             <div class="mock-code">html[data-ww="on"] [class*="_centerCol"] {{ --dsw-alias-bg-base: transparent !important; }}
 .ww-corner[data-corner="br"] {{ transform: scale(-1, -1); }}</div>

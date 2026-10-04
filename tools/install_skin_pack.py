@@ -2,7 +2,7 @@
 
 用法：
     python tools/install_skin_pack.py packs/sakura
-    python tools/install_skin_pack.py packs/sakura --plugin-dir dsh-whale-wallpaper
+    python tools/install_skin_pack.py packs/sakura --plugin-dir dsh-whale-atelier
     python tools/install_skin_pack.py --uninstall sakura
     python tools/install_skin_pack.py --list
 
@@ -21,7 +21,7 @@ import shutil
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_PLUGIN = os.path.join(os.path.dirname(HERE), "dsh-whale-wallpaper")
+DEFAULT_PLUGIN = os.path.join(os.path.dirname(HERE), "dsh-whale-atelier")
 
 
 def index_path(plugin_dir: str) -> str:

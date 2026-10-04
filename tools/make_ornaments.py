@@ -272,7 +272,7 @@ def require_src_dir() -> None:
 def main() -> None:
     require_src_dir()
     here = os.path.dirname(os.path.abspath(__file__))
-    out_dir = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(here), "dsh-whale-wallpaper", "assets")
+    out_dir = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(here), "dsh-whale-atelier", "assets")
     os.makedirs(out_dir, exist_ok=True)
 
     for metal in ("gold", "silver"):

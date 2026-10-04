@@ -1,4 +1,4 @@
-# dsh-whale-wallpaper
+# dsh-whale-atelier
 
 为 [DeepSeek Harness](https://github.com/deepseek-ai) 的 Web GUI 做的**鲸鱼皮肤包**：把鲸鱼娘立绘铺成整个界面的壁纸，再叠一层金/银描边装饰、蕾丝、蝴蝶结与角落立绘，并带环境粒子与 Agent 状态联动。
 
@@ -37,8 +37,8 @@
 # GitHub 直装（pnpm 支持 git spec）
 cd ~/.dsh/profiles/<profile>
 "<runtime>/dependencies/node/bin/node.exe" \
-  "<runtime>/dependencies/pnpm/bin/pnpm.mjs" add "github:Cicero010/dsh-whale-wallpaper"
-# 再把 "dsh-whale-wallpaper" 追加到 package.json 的 dsh.profile.bundles 末尾
+  "<runtime>/dependencies/pnpm/bin/pnpm.mjs" add "github:Cicero010/dsh-whale-atelier"
+# 再把 "dsh-whale-atelier" 追加到 package.json 的 dsh.profile.bundles 末尾
 ```
 
 也可以直接在 GUI 的**插件**页安装该组合包。
@@ -46,9 +46,9 @@ cd ~/.dsh/profiles/<profile>
 ### 2) 本地目录链接
 
 ```bash
-git clone https://github.com/Cicero010/dsh-whale-wallpaper ~/.dsh/plugins/dsh-whale-wallpaper
+git clone https://github.com/Cicero010/dsh-whale-atelier ~/.dsh/plugins/dsh-whale-atelier
 cd ~/.dsh/profiles/<profile>
-"<node>" "<pnpm>" add "link:C:/Users/<you>/.dsh/plugins/dsh-whale-wallpaper"
+"<node>" "<pnpm>" add "link:C:/Users/<you>/.dsh/plugins/dsh-whale-atelier"
 # 同样把包名加进 dsh.profile.bundles
 ```
 

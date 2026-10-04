@@ -15,7 +15,7 @@ import sys
 from PIL import Image, ImageDraw
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PLUGIN = os.path.join(os.path.dirname(HERE), "dsh-whale-wallpaper")
+PLUGIN = os.path.join(os.path.dirname(HERE), "dsh-whale-atelier")
 ASSETS = os.path.join(PLUGIN, "assets")
 
 W, H = 320, 200

@@ -1,4 +1,4 @@
-# dsh-whale-wallpaper
+# dsh-whale-atelier
 
 鲸鱼皮肤包 —— 把 `dsh-whale-musume` 的鲸鱼娘立绘铺成 **DeepSeek Harness Web GUI 的背景**，并叠一层金/银描边装饰与角落立绘。
 
@@ -76,20 +76,20 @@
 
 把插件目录链进 profile（路径以 Windows 为例）：
 
-- 插件目录：`%USERPROFILE%\.dsh\plugins\dsh-whale-wallpaper`
+- 插件目录：`%USERPROFILE%\.dsh\plugins\dsh-whale-atelier`
 - profile：`%USERPROFILE%\.dsh\profiles\<profile>`
-  - `dependencies["dsh-whale-wallpaper"] = "link:C:/Users/<you>/.dsh/plugins/dsh-whale-wallpaper"`
-  - `dsh.profile.bundles` 末尾含 `"dsh-whale-wallpaper"`
-  - `node_modules\dsh-whale-wallpaper`：pnpm 建的 junction
+  - `dependencies["dsh-whale-atelier"] = "link:C:/Users/<you>/.dsh/plugins/dsh-whale-atelier"`
+  - `dsh.profile.bundles` 末尾含 `"dsh-whale-atelier"`
+  - `node_modules\dsh-whale-atelier`：pnpm 建的 junction
 
 换机器或换 profile：
 
 ```bash
-ca -r dsh-whale-wallpaper ~/.dsh/plugins/dsh-whale-wallpaper
+ca -r dsh-whale-atelier ~/.dsh/plugins/dsh-whale-atelier
 cd ~/.dsh/profiles/<profile>
 "<runtime>/dependencies/node/bin/node.exe" "<runtime>/dependencies/pnpm/bin/pnpm.mjs" \
-    add "link:C:/Users/<you>/.dsh/plugins/dsh-whale-wallpaper"
-# 再把 "dsh-whale-wallpaper" 追加到 package.json 的 dsh.profile.bundles 末尾
+    add "link:C:/Users/<you>/.dsh/plugins/dsh-whale-atelier"
+# 再把 "dsh-whale-atelier" 追加到 package.json 的 dsh.profile.bundles 末尾
 ```
 
 profile 里 `dsh-hmr` 默认启用（`@deepseek-ai/dsh-base` 的 patch：`disabled: !!jk "!ctx.get('profileContext')"`），所以追加 bundles 后宿主半边**就地挂载**，不需要重启；浏览器半边在页面刷新时重新组合启动图。也可以直接在 GUI 的**插件**页启停这个组合包。

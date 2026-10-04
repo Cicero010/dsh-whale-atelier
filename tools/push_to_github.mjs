@@ -2,8 +2,8 @@
  * 用 GitHub REST + Git Data API 把发布树推成一个仓库（本机不需要 git）。
  *
  * 用法：
- *   node tools/push_to_github.mjs --repo dsh-whale-wallpaper [--private] [--dry-run]
- *                                [--tree _publish/dsh-whale-wallpaper]
+ *   node tools/push_to_github.mjs --repo dsh-whale-atelier [--private] [--dry-run]
+ *                                [--tree _publish/dsh-whale-atelier]
  *                                [--token-file .github-token] [--owner <login>]
  *                                [--message "…"] [--delete-token-file]
  *
@@ -24,8 +24,8 @@ const DESCRIPTION = "DeepSeek Harness 的鲸鱼皮肤包：全界面壁纸 + 金
 
 function parseArgs(argv) {
   const args = {
-    tree: path.join(WORKSPACE, "_publish", "dsh-whale-wallpaper"),
-    repo: "dsh-whale-wallpaper",
+    tree: path.join(WORKSPACE, "_publish", "dsh-whale-atelier"),
+    repo: "dsh-whale-atelier",
     owner: null,
     private: false,
     dryRun: false,
@@ -75,7 +75,7 @@ async function api(token, method, url, body) {
         Authorization: `Bearer ${token}`,
         Accept: "application/vnd.github+json",
         "Content-Type": "application/json",
-        "User-Agent": "dsh-whale-wallpaper-publisher",
+        "User-Agent": "dsh-whale-atelier-publisher",
         "X-GitHub-Api-Version": "2022-11-28",
       },
       body: body === undefined ? undefined : JSON.stringify(body),
@@ -156,7 +156,7 @@ async function tokenScopes(token) {
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/vnd.github+json",
-      "User-Agent": "dsh-whale-wallpaper-publisher",
+      "User-Agent": "dsh-whale-atelier-publisher",
     },
   });
   const header = response.headers.get("x-oauth-scopes");

@@ -1,5 +1,5 @@
 {
-  "name": "dsh-whale-wallpaper",
+  "name": "dsh-whale-atelier",
   "version": "1.1.0",
   "private": true,
   "description": "鲸鱼工作区壁纸 for DeepSeek Harness：把鲸鱼娘立绘铺在 Web GUI 聊天工作区的背景上，可换立绘、可调遮罩、可随时关掉",
@@ -52,11 +52,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cicero010/dsh-whale-wallpaper.git"
+    "url": "git+https://github.com/Cicero010/dsh-whale-atelier.git"
   },
-  "homepage": "https://github.com/Cicero010/dsh-whale-wallpaper#readme",
+  "homepage": "https://github.com/Cicero010/dsh-whale-atelier#readme",
   "bugs": {
-    "url": "https://github.com/Cicero010/dsh-whale-wallpaper/issues"
+    "url": "https://github.com/Cicero010/dsh-whale-atelier/issues"
   },
   "scripts": {
     "test": "node tests/run.mjs"

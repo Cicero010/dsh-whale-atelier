@@ -1188,7 +1188,7 @@ def main() -> None:
     args = parser.parse_args()
 
     here = os.path.dirname(os.path.abspath(__file__))
-    out_dir = args.out or os.path.join(os.path.dirname(here), "dsh-whale-wallpaper", "assets")
+    out_dir = args.out or os.path.join(os.path.dirname(here), "dsh-whale-atelier", "assets")
     os.makedirs(out_dir, exist_ok=True)
 
     sets = list(ALL_SETS) if args.which == "all" else [args.which]
