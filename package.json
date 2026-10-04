@@ -1,0 +1,64 @@
+{
+  "name": "dsh-whale-wallpaper",
+  "version": "1.1.0",
+  "private": true,
+  "description": "鲸鱼工作区壁纸 for DeepSeek Harness：把鲸鱼娘立绘铺在 Web GUI 聊天工作区的背景上，可换立绘、可调遮罩、可随时关掉",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "assets",
+    "skins",
+    "tools",
+    "tests",
+    "docs",
+    "cordis.patch.yml",
+    "README.md",
+    "THIRD-PARTY-NOTICES.md"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "wallpaper",
+    "whale",
+    "theme"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "slots"
+      ]
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.0-rc.2": "compatible"
+      },
+      "note": "壁纸只依赖两处稳定契约：外壳/中栏的 CSS-module 类名后缀（_frame / _centerCol）与 --dsw-alias-bg-base 令牌。类名后缀或令牌改名时壁纸会静默失效，界面回到出厂外观，不会报错。"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cicero010/dsh-whale-wallpaper.git"
+  },
+  "homepage": "https://github.com/Cicero010/dsh-whale-wallpaper#readme",
+  "bugs": {
+    "url": "https://github.com/Cicero010/dsh-whale-wallpaper/issues"
+  },
+  "scripts": {
+    "test": "node tests/run.mjs"
+  }
+}

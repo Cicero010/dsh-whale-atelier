@@ -1,0 +1,17 @@
+# 安装副本：索引安装会把它复制进 assets/packs/，属于构建产物
+assets/packs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 生成预览时的中间产物
+_probe/
+*.tmp

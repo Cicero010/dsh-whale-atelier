@@ -1,0 +1,14 @@
+{
+  "id": "sakura",
+  "version": 1,
+  "name": "樱吹雪",
+  "desc": "夜庭室内 · 樱花与落英 · 金色描边 · 左下角好奇 · 樱花飘落",
+  "scene": "sakura",
+  "metal": "gold",
+  "decor": true,
+  "bow": true,
+  "lace": true,
+  "mascot": "curious",
+  "mascotCorner": "left",
+  "particles": "sakura"
+}

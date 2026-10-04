@@ -1,0 +1,9 @@
+# dsh-whale-wallpaper bundle patch —— 把鲸鱼工作区壁纸叠加到 profile 组合上(零侵入)。
+# 单包双面(dsh.bundle + dsh.client):
+#   · 宿主插件(worker 侧):注册 /api/dsh-whale-wallpaper/assets 只读静态路由,
+#     把包内 assets(wallpaper.css / ww-*.webp)供给浏览器;
+#   · 浏览器插件(dsh.client):拉取 wallpaper.css 注入样式,按「姿势 + 明暗」把
+#     壁纸 URL 与遮罩浓度写到 <html> 的自定义属性上;全部资源本地加载,无外部请求。
+- insert:
+    - id: dsh-whale-wallpaper
+      name: dsh-whale-wallpaper
